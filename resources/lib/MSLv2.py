@@ -3,7 +3,7 @@
 # Author: trummerjo
 # Module: MSLHttpRequestHandler
 # Created on: 26.01.2017
-# License: MIT https://goo.gl/5bMj3H
+# : MIT https://goo.gl/5bMj3H
 
 import re
 import sys
@@ -295,6 +295,7 @@ class MSL(object):
                 resp = self.__parse_chunked_msl_response(resp.text)
                 data = self.__decrypt_payload_chunks(resp['payloads'])
                 if 'licenseResponseBase64' in data[0]:
+                    self.nx_common.log(msg='getting License: ' + data[0]['licenseResponseBase64'])
                     return data[0]['licenseResponseBase64']
                 else:
                     self.nx_common.log(
@@ -524,6 +525,8 @@ class MSL(object):
             data_path=self.nx_common.data_path,
             filename='manifest.mpd',
             content=xml)
+        self.nx_common.log(
+            msg='getting Manifest: ' + xml)
 
         return xml
 
