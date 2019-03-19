@@ -32,6 +32,7 @@ class MSLHttpRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             challenge = data[0]
             sid = base64.standard_b64decode(data[1])
             b64license = self.server.msl_handler.get_license(challenge, sid)
+            print(base64.standard_b64decode(b64license))
             if b64license is not '':
                 self.send_response(200)
                 self.end_headers()
@@ -68,6 +69,8 @@ class MSLHttpRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 int(params['id'][0]),
                 dolby, hevc, hdr, dolbyvision, vp9)
 
+            print('11111111111')
+            print(data)
             self.send_response(200)
             self.send_header('Content-type', 'application/xml')
             self.end_headers()
